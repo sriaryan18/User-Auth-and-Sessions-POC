@@ -4,7 +4,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 
-const MONGO_URI = 'mongodb://localhost:27017/mongo-sessions';
+const MONGO_URI = process.env.MONGO_URI;
 
 const app = express();
 
@@ -20,7 +20,7 @@ const store = new MongoDBStore({
 
 app.use(
   session({
-    secret: 'iamsecret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,
